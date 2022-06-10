@@ -6,7 +6,7 @@
 #include <memory>
 #include "Players/Player.h"
 #include "Cards/Card.h"
-#include "Mtmchkin.h"
+#include "submission/Mtmchkin.h"
 #include "Cards/Vampire.h"
 #include "Cards/Barfight.h"
 #include "Cards/Dragon.h"
