@@ -1,6 +1,24 @@
 #ifndef MTMCHKIN_H_
 #define MTMCHKIN_H_
 
+#include <iostream>
+#include <deque>
+#include <list>
+#include "Cards/Card.h"
+#include "Cards/Barfight.h"
+#include "Cards/Dragon.h"
+#include "Cards/Fairy.h"
+#include "Cards/Goblin.h"
+#include "Cards/Merchant.h"
+#include "Cards/Pitfall.h"
+#include "Cards/Treasure.h"
+#include "Cards/Vampire.h"
+#include "Players/Player.h"
+#include "Players/Fighter.h"
+#include "Players/Rogue.h"
+#include "Players/Wizard.h"
+
+
 class Mtmchkin{
 
 public:
@@ -46,6 +64,10 @@ public:
     *          int - number of rounds played
     */
     int getNumberOfRounds() const;
+
+private:
+    std::deque<Card*> m_cardQueue;
+    std::list<Player*> m_playerQueue;
 };
 
 

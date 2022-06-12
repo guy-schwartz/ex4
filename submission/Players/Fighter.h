@@ -16,7 +16,7 @@ public:
       * c'tor for fighter
       * @param name
       */
-    explicit Fighter(const string& name);
+    Fighter(const std::string& name);
 
     /**
      * default d'tor for fighter
@@ -33,7 +33,7 @@ public:
      * suitable printing function
      * @param out
      */
-    void print(ostream& out) const override;
+    void print(std::ostream& out) const override;
 
 };
 #endif //EX4_FIGHTER_H

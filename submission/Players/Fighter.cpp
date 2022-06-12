@@ -3,12 +3,12 @@
 //
 #include "Fighter.h"
 
-Fighter::Fighter(const string& name) : Player(name) {}
+Fighter::Fighter(const std::string& name) : Player(name) {}
 
 int Fighter::getAttackStrength() const{
     return (2*m_force+m_level);
 }
 
-void Fighter::print(ostream& out) const{
+void Fighter::print(std::ostream& out) const{
     printPlayerDetails(out,m_name,"Fighter",m_level,m_force,m_HP,m_coins);
 }

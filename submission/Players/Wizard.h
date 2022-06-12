@@ -15,7 +15,7 @@ public:
      * c'tor for Wizard
      * @param name
      */
-    explicit Wizard(const string& name);
+    explicit Wizard(const std::string& name);
 
     /**
      * default d'tor for Wizard
@@ -33,7 +33,7 @@ public:
      * suitable printing function
      * @param out
      */
-    void print(ostream& out) const override;
+    void print(std::ostream& out) const override;
 
 };
 

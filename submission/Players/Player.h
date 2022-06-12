@@ -6,7 +6,7 @@
 #define EX4_PLAYER_H
 #include <string>
 #include <iostream>
-using namespace std;
+
 
 const int MAX_HP = 100;
 const int MIN_LEVEL = 1;
@@ -22,7 +22,7 @@ public:
      * c'tor of Player class
      * @param name
      */
-    explicit Player(const string& name);
+    explicit Player(const std::string& name);
     virtual ~Player()=default;
 
 
@@ -89,16 +89,39 @@ public:
      * printing method for operator<<, to be defined in inheriting classes
      * @param out
      */
-    virtual void print(ostream& out) const = 0;
+    virtual void print(std::ostream& out) const = 0;
 
     /**
      * operator<<, prints the following template: <name> <level> <Force> <Hp> <Coins> <Class>
      * @param out
      */
-    friend ostream& operator<<(ostream& out, const Player& player);
+    friend std::ostream& operator<<(std::ostream& out, const Player& player);
+
+    /**
+     * returns the name of the player
+     * @return
+     */
+    std::string getName();
+
+    /**
+     * returns the number of coins the player currently holds
+     * @return
+     */
+    int showCoins() const;
+
+    /**
+     * returns the current HP status of a player
+     * @return
+     */
+    int showHP() const;
+
+    /**
+     * downgrade force by one
+     */
+    void hitForce(const int hiyBy);
 
 protected:
-    string m_name;
+    std::string m_name;
     int m_level;
     int m_force;
     int m_HP;

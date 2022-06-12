@@ -3,7 +3,7 @@
 //
 #include "Wizard.h"
 
-Wizard::Wizard(const string& name) : Player(name) {}
+Wizard::Wizard(const std::string& name) : Player(name) {}
 
 void Wizard::heal(int newPoints){
     if(newPoints<0){
@@ -16,6 +16,6 @@ void Wizard::heal(int newPoints){
     m_HP=tempHP;
 }
 
-void Wizard::print(ostream& out) const{
+void Wizard::print(std::ostream& out) const{
     printPlayerDetails(out,m_name,"Wizard",m_level,m_force,m_HP,m_coins);
 }

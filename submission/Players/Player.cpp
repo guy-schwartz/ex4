@@ -3,13 +3,7 @@
 //
 #include "Player.h"
 
-Player::Player(const string& name) : m_name(name), m_level(MIN_LEVEL), m_coins(DEFAULT_COINS), m_force(DEFAULT_FORCE), m_HP(MAX_HP){}
-
-std::ostream& operator<<(ostream& out, const Player& player)
-{
-    player.print(out);
-    return out;
-}
+Player::Player(const std::string& name) : m_name(name), m_level(MIN_LEVEL), m_coins(DEFAULT_COINS), m_force(DEFAULT_FORCE), m_HP(MAX_HP){}
 
 void Player::levelUp(){
     if(m_level>=MAX_LEVEL){
@@ -82,4 +76,32 @@ bool Player::pay(int coinsToPay){
 int Player::getAttackStrength() const{
     int attackStrength = m_force+m_level;
     return attackStrength;
+}
+
+std::ostream& operator<<(std::ostream& out, const Player& player)
+{
+    player.print(out);
+    return out;
+}
+
+std::string Player::getName() {
+    return m_name;
+}
+
+int Player::showCoins() const {
+    return m_coins;
+}
+
+int Player::showHP() const{
+    return m_HP;
+}
+
+void Player::hitForce(const int hitBy){
+    int tempForce=m_force-hitBy;
+    if(tempForce<0){
+        m_force=0;
+    }
+    else{
+        m_force=tempForce;
+    }
 }

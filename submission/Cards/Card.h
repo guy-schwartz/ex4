@@ -6,7 +6,12 @@
 #define EX4_CARD_H
 #include <string>
 #include <iostream>
-using namespace std;
+#include "../Players/Player.h"
+#include "../Players/Rogue.h"
+#include "../Players/Fighter.h"
+#include "../Players/Wizard.h"
+#include "../utilities.h"
+
 
 class Card{
 public:
@@ -14,23 +19,32 @@ public:
      * c'tor of Card class
      * @param name
      */
-    explicit Card(const string& name);
+    explicit Card(const std::string& name);
     virtual ~Card()=default;
 
     /**
      * printing method for operator<<, to be defined in inheriting classes
      * @param out
      */
-    virtual void print(ostream& out) const = 0;
+    virtual void print(std::ostream& out) const;
 
     /**
      * operator<<, prints the following template: <name> <level> <Force> <Hp> <Coins> <Class>
      * @param out
      */
-    friend ostream& operator<<(ostream& out, const Card& card);
+    friend std::ostream& operator<<(std::ostream& out, const Card& card);
+
+    /**
+     * Handling the player's applyEncounter with the card:
+     *
+     * @param player - The player.
+     * @return
+     *      void
+    */
+    virtual void applyEncounter(Player& player) const = 0;
 
 protected:
-    string m_name;
+    const std::string m_name;
 };
 
 #endif //EX4_CARD_H

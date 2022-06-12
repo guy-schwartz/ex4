@@ -3,7 +3,7 @@
 //
 #include "Rogue.h"
 
-Rogue::Rogue(const string& name) : Player(name) {}
+Rogue::Rogue(const std::string& name) : Player(name) {}
 
 void Rogue::addCoins(int coinsToAdd){
     if(coinsToAdd<0){
@@ -12,6 +12,6 @@ void Rogue::addCoins(int coinsToAdd){
     m_coins+=(2*coinsToAdd);
 }
 
-void Rogue::print(ostream& out) const{
+void Rogue::print(std::ostream& out) const{
     printPlayerDetails(out,m_name,"Rogue",m_level,m_force,m_HP,m_coins);
 }
