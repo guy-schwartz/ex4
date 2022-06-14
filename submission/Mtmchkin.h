@@ -2,8 +2,10 @@
 #define MTMCHKIN_H_
 
 #include <iostream>
+#include <fstream>
 #include <deque>
 #include <list>
+#include <memory>
 #include "Cards/Card.h"
 #include "Cards/Barfight.h"
 #include "Cards/Dragon.h"
@@ -18,11 +20,17 @@
 #include "Players/Rogue.h"
 #include "Players/Wizard.h"
 
+static const int MIN_CARDS = 5;
+static const int MIN_PLAYERS=2;
+static const int MAX_PLAYERS=6;
+static const char SPACE = ' ';
+static const char MIN_LETTER = 'A';
+static const char MAX_LETTER = 'z';
 
 class Mtmchkin{
-
 public:
-    
+
+
     /*
     * C'tor of Mtmchkin class
     *
@@ -31,7 +39,7 @@ public:
     *      A new instance of Mtmchkin.
     */
     Mtmchkin(const std::string fileName);
-    
+
     /*
     * Play the next Round of the game - according to the instruction in the exercise document.
     *
@@ -39,7 +47,7 @@ public:
     *      void
     */
     void playRound();
-    
+
     /*
     * Prints the leaderBoard of the game at a given stage of the game - according to the instruction in the exercise document.
     *
@@ -47,7 +55,7 @@ public:
     *      void
     */
     void printLeaderBoard() const;
-    
+
     /*
     *  Checks if the game ended:
     *
@@ -56,7 +64,7 @@ public:
     *          False otherwise
     */
     bool isGameOver() const;
-    
+
 	/*
     *  Returns the number of rounds played.
     *
@@ -65,10 +73,45 @@ public:
     */
     int getNumberOfRounds() const;
 
+
 private:
-    std::deque<Card*> m_cardQueue;
-    std::list<Player*> m_playerQueue;
+
+    /**
+     * initializes the cards
+     * @param fileName
+     */
+    void initializeCards(const std::string fileName);
+
+    /**
+     * initializes the players
+     */
+    void initializePlayers();
+
+    /**
+     * returns the team size from the player
+     * @return
+     */
+    static int getTeamSize();
+
+    /**
+     * target each string to its corresponding type of card
+     * @param input
+     * @return if type of card is not identified, nullptr will be returned
+     */
+    static std::unique_ptr<Card> getCardType(const std::string &input);
+
+    /**
+     * gets the players from the user
+     */
+    static bool isNameValid(const std::string &playerName);
+
+    std::deque<std::unique_ptr<Card>> m_cardQueue;
+    std::deque<std::unique_ptr<Player>> m_activePlayers;
+
 };
+
+
+
 
 
 

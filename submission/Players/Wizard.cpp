@@ -5,6 +5,10 @@
 
 Wizard::Wizard(const std::string& name) : Player(name) {}
 
+Player* Wizard::clone() const {
+    return new Wizard(*this);
+}
+
 void Wizard::heal(int newPoints){
     if(newPoints<0){
         return;

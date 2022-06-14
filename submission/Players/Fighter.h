@@ -24,6 +24,8 @@ public:
      */
     ~Fighter() override=default;
 
+    Player* clone() const override;
+
     /**
      * calculates a value which is defined by 2*force+level and returns it
      */

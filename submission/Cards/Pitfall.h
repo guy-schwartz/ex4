@@ -14,6 +14,8 @@ public:
     Pitfall();
     ~Pitfall() override = default;
 
+    Card* clone() const override;
+
     /**
      * Handles non-Rogue player encounter with the card
      *

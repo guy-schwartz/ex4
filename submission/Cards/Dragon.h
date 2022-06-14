@@ -13,6 +13,7 @@ public:
     Dragon();
     ~Dragon() override = default;
 
+    Card* clone() const override;
 
     /**
      * printing method for operator<<

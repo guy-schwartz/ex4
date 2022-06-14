@@ -5,6 +5,10 @@
 
 Fairy::Fairy(): Card("Fairy"), m_heal(10) {}
 
+Card* Fairy::clone() const {
+    return new Fairy(*this);
+}
+
 void Fairy::applyEncounter(Player &player) const {
     printFairyMessage(false);
 }

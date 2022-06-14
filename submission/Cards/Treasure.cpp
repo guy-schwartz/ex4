@@ -5,6 +5,10 @@
 
 Treasure::Treasure() : Card("Treasure"), m_loot(10){}
 
+Card* Treasure::clone() const {
+    return new Treasure(*this);
+}
+
 void Treasure::applyEncounter(Player& player) const{
     player.addCoins(m_loot);
     printTreasureMessage();

@@ -5,6 +5,10 @@
 
 Rogue::Rogue(const std::string& name) : Player(name) {}
 
+Player* Rogue::clone() const {
+    return new Rogue(*this);
+}
+
 void Rogue::addCoins(int coinsToAdd){
     if(coinsToAdd<0){
         return;

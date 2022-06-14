@@ -12,6 +12,7 @@ public:
     Goblin();
     ~Goblin() override = default;
 
+    Card* clone() const override;
 
     /**
      * printing method for operator<<

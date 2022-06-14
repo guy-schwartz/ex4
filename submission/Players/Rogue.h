@@ -23,6 +23,7 @@ public:
      */
     ~Rogue() override=default;
 
+    Player* clone() const override;
     /**
     * member function adds coins by doubling the given value
     * in case of an undefined argument, coins member will remain unchanged

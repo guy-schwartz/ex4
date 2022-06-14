@@ -25,6 +25,7 @@ public:
     explicit Player(const std::string& name);
     virtual ~Player()=default;
 
+    virtual Player* clone() const = 0;
 
     /**
      * upgrades player's level by 1, up to a maximum of 10

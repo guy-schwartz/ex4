@@ -5,6 +5,10 @@
 
 Barfight::Barfight(): Card("Barfight"), m_damage(10) {}
 
+Card* Barfight::clone() const {
+    return new Barfight(*this);
+}
+
 void Barfight::applyEncounter(Player &player) const {
     player.damage(m_damage);
     printBarfightMessage(false);

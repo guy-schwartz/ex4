@@ -13,6 +13,8 @@ public:
     Fairy();
     ~Fairy() override = default;
 
+    Card* clone() const override;
+
     /**
      * Handles non-Wizard player encounter with the card
      *

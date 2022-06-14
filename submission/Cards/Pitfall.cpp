@@ -5,6 +5,10 @@
 
 Pitfall::Pitfall(): Card("Pitfall"), m_damage(10) {}
 
+Card* Pitfall::clone() const {
+    return new Pitfall(*this);
+}
+
 void Pitfall::applyEncounter(Player &player) const {
     player.damage(m_damage);
     printPitfallMessage(false);

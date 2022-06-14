@@ -4,6 +4,9 @@
 #include "Dragon.h"
 Dragon::Dragon(): Card("Dragon"), m_force(25), m_loot(1000) {}
 
+Card* Dragon::clone() const {
+    return new Dragon(*this);
+}
 
 void Dragon::print(std::ostream &out) const {
     printCardDetails(out,m_name);

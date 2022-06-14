@@ -5,6 +5,10 @@
 
 Fighter::Fighter(const std::string& name) : Player(name) {}
 
+Player* Fighter::clone() const {
+    return new Fighter(*this);
+}
+
 int Fighter::getAttackStrength() const{
     return (2*m_force+m_level);
 }

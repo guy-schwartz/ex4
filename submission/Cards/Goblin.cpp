@@ -4,6 +4,9 @@
 #include "Goblin.h"
 Goblin::Goblin(): Card("Goblin"), m_force(6), m_loot(2), m_damage(10) {}
 
+Card* Goblin::clone() const {
+    return new Goblin(*this);
+}
 
 void Goblin::print(std::ostream &out) const {
     printCardDetails(out,m_name);

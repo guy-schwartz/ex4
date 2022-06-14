@@ -23,6 +23,12 @@ public:
     virtual ~Card()=default;
 
     /**
+     * pure clone method
+     * @return
+     */
+    virtual Card* clone() const = 0;
+
+    /**
      * printing method for operator<<, to be defined in inheriting classes
      * @param out
      */

@@ -14,6 +14,8 @@ public:
     Merchant();
     ~Merchant() override = default;
 
+    Card* clone() const override;
+
     /**
      * Handles player encounter with the card
      *

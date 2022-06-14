@@ -12,6 +12,7 @@ public:
     Vampire();
     ~Vampire() override = default;
 
+    Card* clone() const override;
 
     /**
      * printing method for operator<<

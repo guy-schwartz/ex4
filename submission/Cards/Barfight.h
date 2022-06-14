@@ -12,6 +12,8 @@ public:
     Barfight();
     ~Barfight() override = default;
 
+    Card* clone() const override;
+
     /**
      * Handles non-Fighter player encounter with the card
      *

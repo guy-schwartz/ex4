@@ -13,6 +13,8 @@ public:
     Treasure();
     ~Treasure() override = default;
 
+    Card* clone() const override;
+
     /**
      * Handles player encounter with the card
      *

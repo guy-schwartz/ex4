@@ -6,6 +6,10 @@
 
 Merchant::Merchant() : Card("Merchant"), m_heal(1), m_buff(1), m_buffPrice(10), m_healPrice(5) {}
 
+Card* Merchant::clone() const {
+    return new Merchant(*this);
+}
+
 void Merchant::applyEncounter(Player &player) const {
     printMerchantInitialMessageForInteractiveEncounter(std::cout,player.getName(),player.showCoins());
     char tempChoice[MAX_LEN];
