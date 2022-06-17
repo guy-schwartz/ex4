@@ -9,6 +9,7 @@
 
 class Barfight : public Card{
 public:
+    static const int DAMAGE = 10;
     Barfight();
     ~Barfight() override = default;
 

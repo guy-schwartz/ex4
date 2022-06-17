@@ -21,5 +21,5 @@ void Wizard::heal(int newPoints){
 }
 
 void Wizard::print(std::ostream& out) const{
-    printPlayerDetails(out,m_name,"Wizard",m_level,m_force,m_HP,m_coins);
+    printPlayerDetails(out,m_name,WIZARD_JOB,m_level,m_force,m_HP,m_coins);
 }

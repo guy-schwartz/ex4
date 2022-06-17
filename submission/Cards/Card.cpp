@@ -3,6 +3,8 @@
 //
 #include "Card.h"
 
+using std::string;
+
 Card::Card(const std::string& name) : m_name(name){}
 
 void Card::print(std::ostream& out) const{

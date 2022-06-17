@@ -20,17 +20,16 @@
 #include "Players/Rogue.h"
 #include "Players/Wizard.h"
 
-static const int MIN_CARDS = 5;
-static const int MIN_PLAYERS=2;
-static const int MAX_PLAYERS=6;
-static const char SPACE = ' ';
-static const char MIN_LETTER = 'A';
-static const char MAX_LETTER = 'z';
+
 
 class Mtmchkin{
 public:
-
-
+    static const int MIN_CARDS = 5;
+    static const int MIN_PLAYERS=2;
+    static const int MAX_PLAYERS=6;
+    static const char SPACE = ' ';
+    static const char MIN_LETTER = 'A';
+    static const char MAX_LETTER = 'z';
     /*
     * C'tor of Mtmchkin class
     *
@@ -38,7 +37,7 @@ public:
     * @return
     *      A new instance of Mtmchkin.
     */
-    Mtmchkin(const std::string fileName);
+    explicit Mtmchkin(const std::string fileName);
 
     /*
     * Play the next Round of the game - according to the instruction in the exercise document.
@@ -75,6 +74,7 @@ public:
 
 
 private:
+    static const int WINNER_LEVEL = 10;
 
     /**
      * initializes the cards
@@ -85,7 +85,15 @@ private:
     /**
      * initializes the players
      */
-    void initializePlayers();
+    void initializePlayer();
+
+    /**
+     * creates an instance of a player object
+     * @param playerName
+     * @param job
+     * @return returns false if job string is invalid, and doesnt create anything
+     */
+    bool createPlayer(const std::string &playerName, const std::string &job);
 
     /**
      * returns the team size from the player
@@ -101,12 +109,27 @@ private:
     static std::unique_ptr<Card> getCardType(const std::string &input);
 
     /**
-     * gets the players from the user
+     * checks if the player name is valid
      */
     static bool isNameValid(const std::string &playerName);
 
+    /**
+     * deletes null elements from players deque
+     */
+    void cleanDeque();
+
+    /**
+     * makes an iteration on the deck of cards
+     */
+    void iterateOnCards();
+
+
     std::deque<std::unique_ptr<Card>> m_cardQueue;
     std::deque<std::unique_ptr<Player>> m_activePlayers;
+    std::deque<std::unique_ptr<Player>> m_winners;
+    std::deque<std::unique_ptr<Player>> m_losers;
+    int m_numOfRounds;
+    int m_currentCard;
 
 };
 

@@ -3,7 +3,7 @@
 //
 #include "Barfight.h"
 
-Barfight::Barfight(): Card("Barfight"), m_damage(10) {}
+Barfight::Barfight(): Card("Barfight"), m_damage(DAMAGE) {}
 
 Card* Barfight::clone() const {
     return new Barfight(*this);

@@ -10,6 +10,7 @@
 
 class Fairy : public Card{
 public:
+    static const int HEAL = 10;
     Fairy();
     ~Fairy() override = default;
 

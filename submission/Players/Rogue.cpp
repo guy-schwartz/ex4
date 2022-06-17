@@ -17,5 +17,5 @@ void Rogue::addCoins(int coinsToAdd){
 }
 
 void Rogue::print(std::ostream& out) const{
-    printPlayerDetails(out,m_name,"Rogue",m_level,m_force,m_HP,m_coins);
+    printPlayerDetails(out,m_name,ROGUE_JOB,m_level,m_force,m_HP,m_coins);
 }

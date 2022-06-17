@@ -11,6 +11,8 @@
 class Rogue : public Player{
 
 public:
+    const std::string  ROGUE_JOB = "Rogue";
+
     /**
   * c'tor for rogue
   * @param name

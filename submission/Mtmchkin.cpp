@@ -7,10 +7,14 @@ using std::string;
 using std::ifstream;
 using std::getline;
 using std::unique_ptr;
+using std::deque;
 
-Mtmchkin::Mtmchkin(const string fileName) : m_activePlayers(), m_cardQueue() {
+Mtmchkin::Mtmchkin(const string fileName) : m_activePlayers(), m_cardQueue(), m_numOfRounds(1), m_currentCard(0) {
     initializeCards(fileName);
-    initializePlayers();
+    int numPlayers = getTeamSize();
+    for(int i=0 ; i<numPlayers ; i++){
+        initializePlayer();
+    }
 }
 
 
@@ -35,15 +39,20 @@ void Mtmchkin::initializeCards(const string fileName) {
 }
 
 
-void Mtmchkin::initializePlayers() {
-    int numPlayers = getTeamSize();
+void Mtmchkin::initializePlayer() {
     printInsertPlayerMessage();
     string playerName;
-    string temp;
+    string job;
     while(true){
         getline(std::cin, playerName, SPACE);
-        getline(std::cin, temp);
-        string job = temp.substr(1);
+        getline(std::cin, job);
+        if(!isNameValid(playerName)){
+            printInvalidName();
+            continue;
+        }
+        if(createPlayer(playerName,job)){
+            break;
+        }
     }
 }
 
@@ -114,4 +123,94 @@ bool Mtmchkin::isNameValid(const string &playerName) {
         }
     }
     return true;
+}
+
+
+bool Mtmchkin::createPlayer(const string &playerName, const string &job) {
+    if(job=="Fighter"){
+        unique_ptr<Player> pPlayer(new Fighter(playerName));
+        m_activePlayers.push_back(std::move(pPlayer));
+        return true;
+    }
+    else if(job=="Rogue"){
+        unique_ptr<Player> pPlayer(new Rogue(playerName));
+        m_activePlayers.push_back(std::move(pPlayer));
+        return true;
+    }
+    else if(job=="Wizard"){
+        unique_ptr<Player> pPlayer(new Wizard(playerName));
+        m_activePlayers.push_back(std::move(pPlayer));
+        return true;
+    }
+    else{
+        printInvalidClass();
+        return false;
+    }
+}
+
+int Mtmchkin::getNumberOfRounds() const {
+    return m_numOfRounds;
+}
+
+void Mtmchkin::playRound() {
+    printRoundStartMessage(m_numOfRounds);
+    for(unique_ptr<Player> &currentPlayer : m_activePlayers){
+        printTurnStartMessage(currentPlayer->getName());
+        m_cardQueue[m_currentCard]->applyEncounter(*currentPlayer);
+        if(currentPlayer->isKnockedOut()){
+            m_losers.push_front(std::move(currentPlayer));
+        }
+        else if(currentPlayer->getLevel()==WINNER_LEVEL){
+            m_winners.push_back(std::move(currentPlayer));
+        }
+        cleanDeque();
+        iterateOnCards();
+        if(isGameOver()){
+            printGameEndMessage();
+        }
+    }
+    m_numOfRounds++;
+}
+
+
+void Mtmchkin::cleanDeque() {
+    deque<unique_ptr<Player>>::iterator it1 = m_activePlayers.begin();
+    for(unique_ptr<Player> &currentPlayer : m_activePlayers){
+        if(currentPlayer == nullptr){
+            m_activePlayers.erase(it1);
+        }
+        ++it1;
+    }
+}
+
+
+void Mtmchkin::iterateOnCards() {
+    m_currentCard = (m_currentCard+1)%m_cardQueue.size();
+}
+
+
+bool Mtmchkin::isGameOver() const {
+    if(m_activePlayers.empty()){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+void Mtmchkin::printLeaderBoard() const {
+    printLeaderBoardStartMessage();
+    int ranking = 1;
+    for(int i=0 ; i<m_winners.size(); i++){
+        printPlayerLeaderBoard(ranking,*m_winners[i]);
+        ranking++;
+    }
+    for(int i=0 ; i<m_activePlayers.size(); i++){
+        printPlayerLeaderBoard(ranking,*m_activePlayers[i]);
+        ranking++;
+    }
+    for(int i=0 ; i<m_losers.size(); i++){
+        printPlayerLeaderBoard(ranking,*m_losers[i]);
+        ranking++;
+    }
 }

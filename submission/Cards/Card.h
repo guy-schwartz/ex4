@@ -49,6 +49,7 @@ public:
     */
     virtual void applyEncounter(Player& player) const = 0;
 
+
 protected:
     const std::string m_name;
 };

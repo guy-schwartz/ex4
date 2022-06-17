@@ -10,6 +10,8 @@
 
 class Dragon : public Card{
 public:
+    static const int LOOT = 1000;
+    static const int FORCE = 25;
     Dragon();
     ~Dragon() override = default;
 

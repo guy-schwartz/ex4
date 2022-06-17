@@ -119,7 +119,7 @@ public:
     /**
      * downgrade force by one
      */
-    void hitForce(const int hiyBy);
+    void hitForce(const int hitBy);
 
 protected:
     std::string m_name;

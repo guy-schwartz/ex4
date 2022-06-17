@@ -11,6 +11,8 @@
 class Wizard : public Player {
 
 public:
+    const std::string WIZARD_JOB = "Wizard";
+
     /**
      * c'tor for Wizard
      * @param name

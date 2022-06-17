@@ -2,7 +2,7 @@
 // Created by Guy Schwartz on 09/06/2022.
 //
 #include "Goblin.h"
-Goblin::Goblin(): Card("Goblin"), m_force(6), m_loot(2), m_damage(10) {}
+Goblin::Goblin(): Card("Goblin"), m_force(FORCE), m_loot(LOOT), m_damage(DAMAGE) {}
 
 Card* Goblin::clone() const {
     return new Goblin(*this);

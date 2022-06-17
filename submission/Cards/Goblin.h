@@ -9,6 +9,9 @@
 
 class Goblin : public Card{
 public:
+    static const int LOOT = 2;
+    static const int FORCE = 6;
+    static const int DAMAGE = 10;
     Goblin();
     ~Goblin() override = default;
 

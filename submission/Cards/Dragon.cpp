@@ -2,7 +2,7 @@
 // Created by Guy Schwartz on 09/06/2022.
 //
 #include "Dragon.h"
-Dragon::Dragon(): Card("Dragon"), m_force(25), m_loot(1000) {}
+Dragon::Dragon(): Card("Dragon"), m_force(FORCE), m_loot(LOOT) {}
 
 Card* Dragon::clone() const {
     return new Dragon(*this);

@@ -12,17 +12,16 @@
 #include "Cards/Vampire.h"
 #include "Cards/Dragon.h"
 #include "Mtmchkin.h"
-
+using std::string;
+using std::cin;
+using std::cout;
 
 int main(){
-    std::fstream file;
-    std::string fileName="deck1.txt";
-    file.open(fileName.c_str());
-    if(!file.is_open())
-        std::cout<<"problem"<<std::endl;
-    std::string word;
-    while(std::getline(file,word)){
-        std::cout<<word<<std::endl;
+    const int MAX_ROUNDS = 100;
+    Mtmchkin game("deck1.txt");
+    while(!game.isGameOver() && game.getNumberOfRounds()<MAX_ROUNDS){
+        game.playRound();
     }
+    game.printLeaderBoard();
     return 0;
 }

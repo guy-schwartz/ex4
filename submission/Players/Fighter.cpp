@@ -14,5 +14,5 @@ int Fighter::getAttackStrength() const{
 }
 
 void Fighter::print(std::ostream& out) const{
-    printPlayerDetails(out,m_name,"Fighter",m_level,m_force,m_HP,m_coins);
+    printPlayerDetails(out,m_name,FIGHTER_JOB,m_level,m_force,m_HP,m_coins);
 }

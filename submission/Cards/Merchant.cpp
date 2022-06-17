@@ -4,7 +4,7 @@
 
 #include "Merchant.h"
 
-Merchant::Merchant() : Card("Merchant"), m_heal(1), m_buff(1), m_buffPrice(10), m_healPrice(5) {}
+Merchant::Merchant() : Card("Merchant"), m_heal(HEAL), m_buff(BUFF), m_buffPrice(BUFF_PRICE), m_healPrice(HEAL_PRICE) {}
 
 Card* Merchant::clone() const {
     return new Merchant(*this);
@@ -12,32 +12,45 @@ Card* Merchant::clone() const {
 
 void Merchant::applyEncounter(Player &player) const {
     printMerchantInitialMessageForInteractiveEncounter(std::cout,player.getName(),player.showCoins());
-    char tempChoice[MAX_LEN];
-    std::cin.getline(tempChoice,MAX_LEN); //todo: exceptions
-    int choice=std::stoi(tempChoice);
-    switch (choice){
-        case 0:
-            printMerchantSummary(std::cout,player.getName(),0,0);
-            break;
-        case 1:
-            if(player.pay(m_healPrice)){
-                player.heal(m_heal);
-                printMerchantSummary(std::cout,player.getName(),1,m_healPrice);
+    while(true){
+        try{
+            switch (getChoice()){
+                case LEAVE:
+                    printMerchantSummary(std::cout,player.getName(),LEAVE,0);
+                    break;
+                case BUY_HP:
+                    if(player.pay(m_healPrice)){
+                        player.heal(m_heal);
+                        printMerchantSummary(std::cout,player.getName(),BUY_HP,m_healPrice);
+                    }
+                    else{
+                        printMerchantInsufficientCoins(std::cout);
+                    }
+                    break;
+                case BUY_FORCE:
+                    if(player.pay(m_buffPrice)){
+                        player.buff(m_buff);
+                        printMerchantSummary(std::cout,player.getName(),BUY_FORCE,m_buffPrice);
+                    }
+                    else{
+                        printMerchantInsufficientCoins(std::cout);
+                    }
+                    break;
+                default:
+                    throw std::exception(); //todo: handle exceptions
             }
-            else{
-                printMerchantInsufficientCoins(std::cout);
-            }
-            break;
-        case 2:
-            if(player.pay(m_buffPrice)){
-                player.buff(m_buff);
-                printMerchantSummary(std::cout,player.getName(),2,m_buffPrice);
-            }
-            else{
-                printMerchantInsufficientCoins(std::cout);
-            }
-            break;
-        default:
-            throw; //todo: exceptions
+        }
+        catch(...){
+            printInvalidInput();
+            continue;
+        }
+        break;
     }
+}
+
+
+int Merchant::getChoice() {
+        std::string tempString;
+        std::getline(std::cin,tempString);
+        return std::stoi(tempString);
 }
