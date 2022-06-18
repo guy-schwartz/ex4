@@ -43,15 +43,20 @@ void Mtmchkin::initializePlayer() {
     printInsertPlayerMessage();
     string playerName;
     string job;
-    while(true){
-        getline(std::cin, playerName, SPACE);
-        getline(std::cin, job);
-        if(!isNameValid(playerName)){
-            printInvalidName();
-            continue;
+    while(true) {
+        try {
+            getline(std::cin, playerName, SPACE);
+            getline(std::cin, job);
+            if (!isNameValid(playerName)) {
+                printInvalidName();
+                continue;
+            }
+            if (createPlayer(playerName, job)) {
+                break;
+            }
         }
-        if(createPlayer(playerName,job)){
-            break;
+        catch(...){
+            continue;
         }
     }
 }
@@ -61,14 +66,19 @@ int Mtmchkin::getTeamSize(){
     int teamSize;
     string number;
     do{
-        getline(std::cin,number);
-        teamSize = std::stoi(number);
-        if(teamSize>=MIN_PLAYERS && teamSize<=MAX_PLAYERS){
-            break;
+        try {
+            getline(std::cin, number);
+            teamSize = std::stoi(number);
+            if (teamSize >= MIN_PLAYERS && teamSize <= MAX_PLAYERS) {
+                break;
+            }
+            printInvalidTeamSize();
         }
-        printInvalidTeamSize();
+        catch(...){
+            printInvalidTeamSize();
+            continue;
+        }
     } while(true);
-
     return teamSize;
 }
 
@@ -167,6 +177,7 @@ void Mtmchkin::playRound() {
         iterateOnCards();
         if(isGameOver()){
             printGameEndMessage();
+            break;
         }
     }
     m_numOfRounds++;
