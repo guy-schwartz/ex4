@@ -39,6 +39,13 @@ public:
      */
     void print(std::ostream& out) const override;
 
+    /**
+    * returns player's job
+    */
+    std::string getJob() const override;
+
+private:
+    const std::string m_job;
 };
 
 #endif //EX4_ROGUE_H

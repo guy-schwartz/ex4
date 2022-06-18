@@ -10,10 +10,11 @@ Card* Barfight::clone() const {
 }
 
 void Barfight::applyEncounter(Player &player) const {
-    player.damage(m_damage);
-    printBarfightMessage(false);
-}
-
-void Barfight::applyEncounter(Fighter& player) const {
-    printBarfightMessage(true);
+    if(player.getJob()==FIGHTER){
+        printBarfightMessage(true);
+    }
+    else{
+        player.damage(m_damage);
+        printBarfightMessage(false);
+    }
 }

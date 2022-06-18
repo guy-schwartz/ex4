@@ -11,13 +11,14 @@
 
 class Pitfall : public Card{
 public:
+    const std::string ROGUE="Rogue";
     Pitfall();
     ~Pitfall() override = default;
 
     Card* clone() const override;
 
     /**
-     * Handles non-Rogue player encounter with the card
+     * Handles player encounter with the card
      *
      * @param player - The player.
      * @return
@@ -25,14 +26,7 @@ public:
     **/
     void applyEncounter(Player& player) const override;
 
-    /**
-     * Handles Rogue player encounter with the card
-     *
-     * @param player - The player.
-     * @return
-     *      void
-    **/
-    void applyEncounter(Rogue& player) const;
+
 
 private:
     const int m_damage;

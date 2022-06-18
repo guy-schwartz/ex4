@@ -21,7 +21,7 @@ int main(){
     Mtmchkin game("deck1.txt");
     while(!game.isGameOver() && game.getNumberOfRounds()<MAX_ROUNDS){
         game.playRound();
+        game.printLeaderBoard();
     }
-    game.printLeaderBoard();
     return 0;
 }

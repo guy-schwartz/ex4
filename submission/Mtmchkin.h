@@ -30,6 +30,9 @@ public:
     static const char SPACE = ' ';
     static const char MIN_LETTER = 'A';
     static const char MAX_LETTER = 'z';
+    static const int WINNER_LEVEL = 10;
+    static const int MAX_NAME = 15;
+
     /*
     * C'tor of Mtmchkin class
     *
@@ -64,6 +67,7 @@ public:
     */
     bool isGameOver() const;
 
+
 	/*
     *  Returns the number of rounds played.
     *
@@ -71,10 +75,7 @@ public:
     *          int - number of rounds played
     */
     int getNumberOfRounds() const;
-
-
 private:
-    static const int WINNER_LEVEL = 10;
 
     /**
      * initializes the cards

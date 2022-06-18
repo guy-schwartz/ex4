@@ -8,16 +8,16 @@
 #include <iostream>
 
 
-const int MAX_HP = 100;
-const int MIN_LEVEL = 1;
-const int MAX_LEVEL = 10;
-const int MAX_NAME = 15;
-const int DEFAULT_COINS = 10;
-const int DEFAULT_FORCE = 5;
 
 
 class Player{
 public:
+    static const int MAX_HP = 100;
+    static const int MIN_LEVEL = 1;
+    static const int MAX_LEVEL = 10;
+    static const int DEFAULT_COINS = 10;
+    static const int DEFAULT_FORCE = 5;
+
     /**
      * c'tor of Player class
      * @param name
@@ -119,7 +119,13 @@ public:
     /**
      * downgrade force by one
      */
-    void hitForce(const int hitBy);
+    void hitForce(int hitBy);
+
+    /**
+     * returns player's job
+     * @return
+     */
+    virtual std::string getJob() const = 0;
 
 protected:
     std::string m_name;
@@ -127,6 +133,7 @@ protected:
     int m_force;
     int m_HP;
     int m_coins;
+
 };
 
 #endif //EX4_PLAYER_H

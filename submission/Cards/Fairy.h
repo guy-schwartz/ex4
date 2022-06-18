@@ -10,6 +10,7 @@
 
 class Fairy : public Card{
 public:
+    const std::string WIZARD="Wizard";
     static const int HEAL = 10;
     Fairy();
     ~Fairy() override = default;
@@ -17,7 +18,7 @@ public:
     Card* clone() const override;
 
     /**
-     * Handles non-Wizard player encounter with the card
+     * Handles player encounter with the card
      *
      * @param player - The player.
      * @return
@@ -25,14 +26,6 @@ public:
     **/
     void applyEncounter(Player& player) const override;
 
-    /**
-     * Handles Wizard player encounter with the card
-     *
-     * @param player - The player.
-     * @return
-     *      void
-    **/
-    void applyEncounter(Wizard& player) const;
 
 private:
     const int m_heal;

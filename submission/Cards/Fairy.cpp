@@ -10,11 +10,11 @@ Card* Fairy::clone() const {
 }
 
 void Fairy::applyEncounter(Player &player) const {
-    printFairyMessage(false);
+    if(player.getJob()==WIZARD){
+        player.heal(m_heal);
+        printFairyMessage(true);
+    }
+    else{
+        printFairyMessage(false);
+    }
 }
-
-void Fairy::applyEncounter(Wizard &player) const {
-    player.heal(m_heal);
-    printPitfallMessage(true);
-}
-

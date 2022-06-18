@@ -201,16 +201,16 @@ bool Mtmchkin::isGameOver() const {
 void Mtmchkin::printLeaderBoard() const {
     printLeaderBoardStartMessage();
     int ranking = 1;
-    for(int i=0 ; i<m_winners.size(); i++){
-        printPlayerLeaderBoard(ranking,*m_winners[i]);
+    for(const unique_ptr<Player> &player: m_winners){
+        printPlayerLeaderBoard(ranking,*player);
         ranking++;
     }
-    for(int i=0 ; i<m_activePlayers.size(); i++){
-        printPlayerLeaderBoard(ranking,*m_activePlayers[i]);
+    for(const unique_ptr<Player> &player : m_activePlayers){
+        printPlayerLeaderBoard(ranking,*player);
         ranking++;
     }
-    for(int i=0 ; i<m_losers.size(); i++){
-        printPlayerLeaderBoard(ranking,*m_losers[i]);
+    for(const unique_ptr<Player> &player : m_losers){
+        printPlayerLeaderBoard(ranking,*player);
         ranking++;
     }
 }

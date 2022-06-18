@@ -10,11 +10,10 @@ Card* Pitfall::clone() const {
 }
 
 void Pitfall::applyEncounter(Player &player) const {
-    player.damage(m_damage);
-    printPitfallMessage(false);
+    if (player.getJob() == ROGUE) {
+        printPitfallMessage(true);
+    } else {
+        player.damage(m_damage);
+        printPitfallMessage(false);
+    }
 }
-
-void Pitfall::applyEncounter(Rogue &player) const {
-    printPitfallMessage(true);
-}
-

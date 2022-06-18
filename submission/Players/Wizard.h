@@ -9,7 +9,6 @@
 #include "../utilities.h"
 
 class Wizard : public Player {
-
 public:
     const std::string WIZARD_JOB = "Wizard";
 
@@ -38,6 +37,14 @@ public:
      * @param out
      */
     void print(std::ostream& out) const override;
+
+    /**
+    * returns player's job
+    */
+    std::string getJob() const override;
+
+private:
+    const std::string m_job;
 
 };
 
