@@ -16,12 +16,12 @@ using std::string;
 using std::cin;
 using std::cout;
 
-int main(){
+int main1(){
     const int MAX_ROUNDS = 100;
     Mtmchkin game("deck1.txt");
     while(!game.isGameOver() && game.getNumberOfRounds()<MAX_ROUNDS){
         game.playRound();
-        game.printLeaderBoard();
     }
+    game.printLeaderBoard();
     return 0;
 }

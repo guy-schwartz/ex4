@@ -37,7 +37,7 @@ void Merchant::applyEncounter(Player &player) const {
                     }
                     break;
                 default:
-                    throw std::exception(); //todo: handle exceptions
+                    throw std::out_of_range("bad number");
             }
         }
         catch(...){

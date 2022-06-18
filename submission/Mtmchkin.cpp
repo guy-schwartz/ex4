@@ -4,7 +4,7 @@
 
 #include "Mtmchkin.h"
 using std::string;
-using std::ifstream;
+using std::fstream;
 using std::getline;
 using std::unique_ptr;
 using std::deque;
@@ -19,14 +19,19 @@ Mtmchkin::Mtmchkin(const string fileName) : m_activePlayers(), m_cardQueue(), m_
 
 
 void Mtmchkin::initializeCards(const string fileName) {
-    ifstream file;
-    file.open(fileName); //todo: exception if file does not open
+    fstream file;
+    file.open(fileName, std::ios::in);
+
+    if(!file.is_open())
+        throw DeckFileNotFound();
+
     string lineContent;
     int cardCounter=0;
+
     while(getline(file,lineContent)){
         unique_ptr<Card> card = getCardType(lineContent);
         if(card==nullptr){
-            throw; //todo: handle exceptions
+            throw DeckFileFormatError(++cardCounter);
         }
         else{
             m_cardQueue.push_back(std::move(card));
@@ -34,9 +39,10 @@ void Mtmchkin::initializeCards(const string fileName) {
         }
     }
     if(cardCounter<MIN_CARDS){
-        throw; //todo: handle exceptions
+        throw DeckFileInvalidSize();
     }
 }
+
 
 
 void Mtmchkin::initializePlayer() {
