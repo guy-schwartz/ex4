@@ -4,7 +4,7 @@
 
 #include "Merchant.h"
 
-Merchant::Merchant() : Card("Merchant"), m_heal(HEAL), m_buff(BUFF), m_buffPrice(BUFF_PRICE), m_healPrice(HEAL_PRICE) {}
+Merchant::Merchant() : Card("Merchant"), m_heal(HEAL), m_buff(BUFF), m_healPrice(HEAL_PRICE),  m_buffPrice(BUFF_PRICE){}
 
 Card* Merchant::clone() const {
     return new Merchant(*this);

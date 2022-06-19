@@ -10,11 +10,12 @@ Card* Fairy::clone() const {
 }
 
 void Fairy::applyEncounter(Player &player) const {
-    if(player.getJob()==WIZARD){
+    try{
+        Wizard& wizard = dynamic_cast<Wizard&>(player);
         player.heal(m_heal);
         printFairyMessage(true);
     }
-    else{
+    catch (std::bad_cast&){
         printFairyMessage(false);
     }
 }

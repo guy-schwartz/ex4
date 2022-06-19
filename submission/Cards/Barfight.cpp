@@ -10,10 +10,11 @@ Card* Barfight::clone() const {
 }
 
 void Barfight::applyEncounter(Player &player) const {
-    if(player.getJob()==FIGHTER){
+    try{
+        Fighter &fighter = dynamic_cast<Fighter&>(player);
         printBarfightMessage(true);
     }
-    else{
+    catch(const std::bad_cast&){
         player.damage(m_damage);
         printBarfightMessage(false);
     }

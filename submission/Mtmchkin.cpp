@@ -9,7 +9,8 @@ using std::getline;
 using std::unique_ptr;
 using std::deque;
 
-Mtmchkin::Mtmchkin(const string fileName) : m_activePlayers(), m_cardQueue(), m_numOfRounds(1), m_currentCard(0) {
+Mtmchkin::Mtmchkin(const string fileName) : m_cardQueue(), m_activePlayers(),m_winners(), m_losers(), m_numOfRounds(0), m_currentCard(0) {
+    printStartGameMessage();
     initializeCards(fileName);
     int numPlayers = getTeamSize();
     for(int i=0 ; i<numPlayers ; i++){
@@ -169,6 +170,7 @@ int Mtmchkin::getNumberOfRounds() const {
 }
 
 void Mtmchkin::playRound() {
+    m_numOfRounds++;
     printRoundStartMessage(m_numOfRounds);
     for(unique_ptr<Player> &currentPlayer : m_activePlayers){
         printTurnStartMessage(currentPlayer->getName());
@@ -186,7 +188,6 @@ void Mtmchkin::playRound() {
             break;
         }
     }
-    m_numOfRounds++;
 }
 
 

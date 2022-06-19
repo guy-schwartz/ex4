@@ -121,11 +121,7 @@ public:
      */
     void hitForce(int hitBy);
 
-    /**
-     * returns player's job
-     * @return
-     */
-    virtual std::string getJob() const = 0;
+
 
 protected:
     std::string m_name;

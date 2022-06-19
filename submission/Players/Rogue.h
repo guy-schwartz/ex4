@@ -11,6 +11,7 @@
 class Rogue : public Player{
 
 public:
+
     const std::string  ROGUE_JOB = "Rogue";
 
     /**
@@ -26,6 +27,7 @@ public:
     ~Rogue() override=default;
 
     Player* clone() const override;
+
     /**
     * member function adds coins by doubling the given value
     * in case of an undefined argument, coins member will remain unchanged
@@ -39,13 +41,7 @@ public:
      */
     void print(std::ostream& out) const override;
 
-    /**
-    * returns player's job
-    */
-    std::string getJob() const override;
 
-private:
-    const std::string m_job;
 };
 
 #endif //EX4_ROGUE_H

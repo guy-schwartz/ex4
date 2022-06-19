@@ -3,7 +3,7 @@
 //
 #include "Wizard.h"
 
-Wizard::Wizard(const std::string& name) : Player(name), m_job(WIZARD_JOB) {}
+Wizard::Wizard(const std::string& name) : Player(name) {}
 
 Player* Wizard::clone() const {
     return new Wizard(*this);
@@ -22,8 +22,4 @@ void Wizard::heal(int newPoints){
 
 void Wizard::print(std::ostream& out) const{
     printPlayerDetails(out,m_name,WIZARD_JOB,m_level,m_force,m_HP,m_coins);
-}
-
-std::string Wizard::getJob() const {
-    return m_job;
 }

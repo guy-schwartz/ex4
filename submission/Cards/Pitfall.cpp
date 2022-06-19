@@ -10,9 +10,11 @@ Card* Pitfall::clone() const {
 }
 
 void Pitfall::applyEncounter(Player &player) const {
-    if (player.getJob() == ROGUE) {
+    try{
+        Rogue& rogue = dynamic_cast<Rogue&>(player);
         printPitfallMessage(true);
-    } else {
+    }
+    catch(std::bad_cast&){
         player.damage(m_damage);
         printPitfallMessage(false);
     }

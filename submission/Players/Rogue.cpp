@@ -3,7 +3,7 @@
 //
 #include "Rogue.h"
 
-Rogue::Rogue(const std::string& name) : Player(name), m_job(ROGUE_JOB) {}
+Rogue::Rogue(const std::string& name) : Player(name) {}
 
 Player* Rogue::clone() const {
     return new Rogue(*this);
@@ -20,6 +20,3 @@ void Rogue::print(std::ostream& out) const{
     printPlayerDetails(out,m_name,ROGUE_JOB,m_level,m_force,m_HP,m_coins);
 }
 
-std::string Rogue::getJob() const {
-    return m_job;
-}

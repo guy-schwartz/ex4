@@ -3,7 +3,7 @@
 //
 #include "Player.h"
 
-Player::Player(const std::string& name) : m_name(name), m_level(MIN_LEVEL), m_coins(DEFAULT_COINS), m_force(DEFAULT_FORCE), m_HP(MAX_HP){}
+Player::Player(const std::string& name) : m_name(name), m_level(MIN_LEVEL), m_force(DEFAULT_FORCE), m_HP(MAX_HP), m_coins(DEFAULT_COINS){}
 
 void Player::levelUp(){
     if(m_level>=MAX_LEVEL){
