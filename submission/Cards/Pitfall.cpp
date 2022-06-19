@@ -11,7 +11,7 @@ Card* Pitfall::clone() const {
 
 void Pitfall::applyEncounter(Player &player) const {
     try{
-        Rogue& rogue = dynamic_cast<Rogue&>(player);
+        dynamic_cast<Rogue&>(player);
         printPitfallMessage(true);
     }
     catch(std::bad_cast&){

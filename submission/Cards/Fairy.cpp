@@ -11,7 +11,7 @@ Card* Fairy::clone() const {
 
 void Fairy::applyEncounter(Player &player) const {
     try{
-        Wizard& wizard = dynamic_cast<Wizard&>(player);
+        dynamic_cast<Wizard&>(player);
         player.heal(m_heal);
         printFairyMessage(true);
     }

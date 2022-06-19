@@ -11,7 +11,7 @@ Card* Barfight::clone() const {
 
 void Barfight::applyEncounter(Player &player) const {
     try{
-        Fighter &fighter = dynamic_cast<Fighter&>(player);
+        dynamic_cast<Fighter&>(player);
         printBarfightMessage(true);
     }
     catch(const std::bad_cast&){
