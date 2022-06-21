@@ -4,7 +4,6 @@
 #include <iostream>
 #include <fstream>
 #include <deque>
-#include <list>
 #include <memory>
 #include "Cards/Card.h"
 #include "Cards/Barfight.h"
@@ -28,8 +27,10 @@ public:
     static const int MIN_PLAYERS=2;
     static const int MAX_PLAYERS=6;
     static const char SPACE = ' ';
-    static const char MIN_LETTER = 'A';
-    static const char MAX_LETTER = 'z';
+    static const char MIN_UPPERCASE = 'A';
+    static const char MAX_UPPERCASE = 'Z';
+    static const char MIN_LOWERCASE = 'a';
+    static const char MAX_LOWERCASE = 'z';
     static const int WINNER_LEVEL = 10;
     static const int MAX_NAME = 15;
 
@@ -40,7 +41,7 @@ public:
     * @return
     *      A new instance of Mtmchkin.
     */
-    explicit Mtmchkin(const std::string fileName);
+    explicit Mtmchkin(const std::string &fileName);
 
     /*
     * Play the next Round of the game - according to the instruction in the exercise document.
@@ -75,13 +76,14 @@ public:
     *          int - number of rounds played
     */
     int getNumberOfRounds() const;
+
 private:
 
     /**
      * initializes the cards
      * @param fileName
      */
-    void initializeCards(const std::string fileName);
+    void initializeCards(const std::string &fileName);
 
     /**
      * initializes the players
@@ -114,10 +116,6 @@ private:
      */
     static bool isNameValid(const std::string &playerName);
 
-    /**
-     * deletes null elements from players deque
-     */
-    void cleanDeque();
 
     /**
      * makes an iteration on the deck of cards

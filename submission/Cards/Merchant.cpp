@@ -25,6 +25,7 @@ void Merchant::applyEncounter(Player &player) const {
                     }
                     else{
                         printMerchantInsufficientCoins(std::cout);
+                        printMerchantSummary(std::cout,player.getName(),BUY_HP,0);
                     }
                     break;
                 case BUY_FORCE:
@@ -34,6 +35,7 @@ void Merchant::applyEncounter(Player &player) const {
                     }
                     else{
                         printMerchantInsufficientCoins(std::cout);
+                        printMerchantSummary(std::cout,player.getName(),BUY_FORCE,0);
                     }
                     break;
                 default:
@@ -52,5 +54,9 @@ void Merchant::applyEncounter(Player &player) const {
 int Merchant::getChoice() {
         std::string tempString;
         std::getline(std::cin,tempString);
-        return std::stoi(tempString);
+        int choice = std::stoi(tempString);
+        if(tempString.size()!=1){
+            throw std::invalid_argument("");
+        }
+        return choice;
 }

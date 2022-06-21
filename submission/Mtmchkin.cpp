@@ -9,7 +9,7 @@ using std::getline;
 using std::unique_ptr;
 using std::deque;
 
-Mtmchkin::Mtmchkin(const string fileName) : m_cardQueue(), m_activePlayers(),m_winners(), m_losers(), m_numOfRounds(0), m_currentCard(0) {
+Mtmchkin::Mtmchkin(const string &fileName) : m_cardQueue(), m_activePlayers(),m_winners(), m_losers(), m_numOfRounds(0), m_currentCard(0) {
     printStartGameMessage();
     initializeCards(fileName);
     int numPlayers = getTeamSize();
@@ -19,7 +19,7 @@ Mtmchkin::Mtmchkin(const string fileName) : m_cardQueue(), m_activePlayers(),m_w
 }
 
 
-void Mtmchkin::initializeCards(const string fileName) {
+void Mtmchkin::initializeCards(const string &fileName) {
     fstream file;
     file.open(fileName, std::ios::in);
 
@@ -28,15 +28,16 @@ void Mtmchkin::initializeCards(const string fileName) {
 
     string lineContent;
     int cardCounter=0;
-
+    int lineCounter=1;
     while(getline(file,lineContent)){
         unique_ptr<Card> card = getCardType(lineContent);
         if(card==nullptr){
-            throw DeckFileFormatError(++cardCounter);
+            throw DeckFileFormatError(lineCounter);
         }
         else{
             m_cardQueue.push_back(std::move(card));
             cardCounter++;
+            lineCounter++;
         }
     }
     if(cardCounter<MIN_CARDS){
@@ -76,15 +77,18 @@ int Mtmchkin::getTeamSize(){
         try {
             getline(std::cin, number);
             teamSize = std::stoi(number);
-            if (teamSize >= MIN_PLAYERS && teamSize <= MAX_PLAYERS) {
-                break;
+            if (teamSize < MIN_PLAYERS || teamSize > MAX_PLAYERS || number.size()!=1) {
+                printInvalidTeamSize();
+                printEnterTeamSizeMessage();
+                continue;
             }
-            printInvalidTeamSize();
         }
         catch(...){
             printInvalidTeamSize();
+            printEnterTeamSizeMessage();
             continue;
         }
+        break;
     } while(true);
     return teamSize;
 }
@@ -135,7 +139,7 @@ bool Mtmchkin::isNameValid(const string &playerName) {
         return false;
     }
     for(char letter: playerName) {
-        if(letter<MIN_LETTER||letter>MAX_LETTER){
+        if(letter<MIN_UPPERCASE||letter>MAX_LOWERCASE||(letter>MAX_UPPERCASE&&letter<MIN_LOWERCASE)){
             return false;
         }
     }
@@ -172,16 +176,22 @@ int Mtmchkin::getNumberOfRounds() const {
 void Mtmchkin::playRound() {
     m_numOfRounds++;
     printRoundStartMessage(m_numOfRounds);
-    for(unique_ptr<Player> &currentPlayer : m_activePlayers){
-        printTurnStartMessage(currentPlayer->getName());
-        m_cardQueue[m_currentCard]->applyEncounter(*currentPlayer);
-        if(currentPlayer->isKnockedOut()){
-            m_losers.push_front(std::move(currentPlayer));
+    int groupSize = m_activePlayers.size();
+    for(int i=0 ; i<groupSize ; ++i){
+        printTurnStartMessage(m_activePlayers.front()->getName());
+        m_cardQueue[m_currentCard]->applyEncounter(*m_activePlayers.front());
+        if(m_activePlayers.front()->isKnockedOut()){
+            m_losers.push_front(std::move(m_activePlayers.front()));
+            m_activePlayers.pop_front();
         }
-        else if(currentPlayer->getLevel()==WINNER_LEVEL){
-            m_winners.push_back(std::move(currentPlayer));
+        else if(m_activePlayers.front()->getLevel()==WINNER_LEVEL){
+            m_winners.push_back(std::move(m_activePlayers.front()));
+            m_activePlayers.pop_front();
         }
-        cleanDeque();
+        else{
+            m_activePlayers.push_back(std::move(m_activePlayers.front()));
+            m_activePlayers.pop_front();
+        }
         iterateOnCards();
         if(isGameOver()){
             printGameEndMessage();
@@ -189,18 +199,6 @@ void Mtmchkin::playRound() {
         }
     }
 }
-
-
-void Mtmchkin::cleanDeque() {
-    deque<unique_ptr<Player>>::iterator it1 = m_activePlayers.begin();
-    for(unique_ptr<Player> &currentPlayer : m_activePlayers){
-        if(currentPlayer == nullptr){
-            m_activePlayers.erase(it1);
-        }
-        ++it1;
-    }
-}
-
 
 void Mtmchkin::iterateOnCards() {
     m_currentCard = (m_currentCard+1)%m_cardQueue.size();
