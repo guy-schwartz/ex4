@@ -3,7 +3,7 @@
 //
 #include "Fairy.h"
 
-Fairy::Fairy(): Card(FAIRY), m_heal(HEAL) {}
+Fairy::Fairy(): Card(FAIRY_CARD), m_heal(HEAL) {}
 
 Fairy* Fairy::clone() const {
     return new Fairy(*this);

@@ -91,39 +91,39 @@ int Mtmchkin::getTeamSize(){
 
 
 unique_ptr<Card> Mtmchkin::getCardType(const std::string &input, fstream &file, int &countLines){
-    if(input=="Barfight"){
+    if(input==BARFIGHT_CARD){
         unique_ptr<Card> pCard(new Barfight());
         return pCard;
     }
-    else if(input=="Dragon"){
+    else if(input==DRAGON_CARD){
         unique_ptr<Card> pCard(new Dragon());
         return pCard;
     }
-    else if (input=="Fairy"){
+    else if (input==FAIRY_CARD){
         unique_ptr<Card> pCard(new Fairy());
         return pCard;
     }
-    else if (input=="Goblin"){
+    else if (input==GOBLIN_CARD){
         unique_ptr<Card> pCard(new Goblin());
         return pCard;
     }
-    else if (input=="Merchant"){
+    else if (input==MERCHANT_CARD){
         unique_ptr<Card> pCard(new Merchant());
         return pCard;
     }
-    else if (input=="Pitfall"){
+    else if (input==PITFALL_CARD){
         unique_ptr<Card> pCard(new Pitfall());
         return pCard;
     }
-    else if (input=="Treasure"){
+    else if (input==TREASURE_CARD){
         unique_ptr<Card> pCard(new Treasure());
         return pCard;
     }
-    else if (input=="Vampire"){
+    else if (input==VAMPIRE_CARD){
         unique_ptr<Card> pCard(new Vampire());
         return pCard;
     }
-    else if (input=="Gang"){
+    else if (input==GANG_CARD){
         unique_ptr<Card> pCard(new Gang(file,countLines));
         return pCard;
     }

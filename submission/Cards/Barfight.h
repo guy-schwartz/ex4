@@ -7,7 +7,7 @@
 
 #include "Card.h"
 
-const std::string FIGHTER="Fighter";
+const std::string BARFIGHT_CARD="Barfight";
 
 class Barfight : public Card{
 public:
