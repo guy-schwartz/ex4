@@ -5,7 +5,7 @@
 
 Barfight::Barfight(): Card("Barfight"), m_damage(DAMAGE) {}
 
-Card* Barfight::clone() const {
+Barfight* Barfight::clone() const {
     return new Barfight(*this);
 }
 

@@ -21,6 +21,9 @@ public:
      */
     explicit Card(const std::string& name);
     virtual ~Card()=default;
+    Card(const Card &oldCard)=default;
+
+    Card();
 
     /**
      * pure clone method

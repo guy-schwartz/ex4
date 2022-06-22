@@ -3,9 +3,9 @@
 //
 #include "Fairy.h"
 
-Fairy::Fairy(): Card("Fairy"), m_heal(HEAL) {}
+Fairy::Fairy(): Card(FAIRY), m_heal(HEAL) {}
 
-Card* Fairy::clone() const {
+Fairy* Fairy::clone() const {
     return new Fairy(*this);
 }
 

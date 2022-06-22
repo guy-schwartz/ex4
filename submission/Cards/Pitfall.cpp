@@ -3,9 +3,9 @@
 //
 #include "Pitfall.h"
 
-Pitfall::Pitfall(): Card("Pitfall"), m_damage(10) {}
+Pitfall::Pitfall(): Card(PITFALL_CARD), m_damage(10) {}
 
-Card* Pitfall::clone() const {
+Pitfall* Pitfall::clone() const {
     return new Pitfall(*this);
 }
 

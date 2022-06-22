@@ -5,7 +5,7 @@
 
 Rogue::Rogue(const std::string& name) : Player(name) {}
 
-Player* Rogue::clone() const {
+Rogue* Rogue::clone() const {
     return new Rogue(*this);
 }
 

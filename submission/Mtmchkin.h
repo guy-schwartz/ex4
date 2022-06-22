@@ -14,6 +14,7 @@
 #include "Cards/Pitfall.h"
 #include "Cards/Treasure.h"
 #include "Cards/Vampire.h"
+#include "Cards/Gang.h"
 #include "Players/Player.h"
 #include "Players/Fighter.h"
 #include "Players/Rogue.h"
@@ -109,7 +110,7 @@ private:
      * @param input
      * @return if type of card is not identified, nullptr will be returned
      */
-    static std::unique_ptr<Card> getCardType(const std::string &input);
+    static std::unique_ptr<Card> getCardType(const std::string &input, std::fstream &file, int &countLines);
 
     /**
      * checks if the player name is valid

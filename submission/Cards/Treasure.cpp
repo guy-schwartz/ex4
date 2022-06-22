@@ -3,9 +3,9 @@
 //
 #include "Treasure.h"
 
-Treasure::Treasure() : Card("Treasure"), m_loot(10){}
+Treasure::Treasure() : Card(TREASURE_CARD), m_loot(10){}
 
-Card* Treasure::clone() const {
+Treasure* Treasure::clone() const {
     return new Treasure(*this);
 }
 

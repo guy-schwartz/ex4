@@ -24,7 +24,7 @@ public:
      */
     ~Wizard() override=default;
 
-    Player* clone() const override;
+    Wizard* clone() const override;
 
     /**
       * updates the health points up to a maximum defined by maxHP by double the given number

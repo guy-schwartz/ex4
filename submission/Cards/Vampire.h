@@ -5,20 +5,26 @@
 #ifndef EX4_VAMPIRE_H
 #define EX4_VAMPIRE_H
 
-#include "Card.h"
+#include "Battle.h"
 
-class Vampire : public Card{
+const std::string VAMPIRE_CARD = "Vampire";
+
+class Vampire : public Battle{
 public:
+    static const int FORCE = 10;
+    static const int LOOT = 2;
+    static const int DAMAGE = 10;
+
     Vampire();
     ~Vampire() override = default;
 
-    Card* clone() const override;
+    Vampire* clone() const override;
 
     /**
-     * printing method for operator<<
-     * @param out
+     * apply damage on player
+     * @param player
      */
-    void print(std::ostream& out) const override;
+    void damage(Player &player) const override;
 
     /**
      * Handles player encounter with the card
@@ -30,9 +36,6 @@ public:
     void applyEncounter(Player& player) const override;
 
 private:
-    const int m_loot;
-    const int m_force;
-    const int m_damage;
     const int m_forceDamage;
 };
 #endif //EX4_VAMPIRE_H

@@ -5,23 +5,26 @@
 #ifndef EX4_GOBLIN_H
 #define EX4_GOBLIN_H
 
-#include "Card.h"
+#include "Battle.h"
 
-class Goblin : public Card{
+const std::string GOBLIN_CARD = "Goblin";
+
+class Goblin : public Battle{
 public:
     static const int LOOT = 2;
     static const int FORCE = 6;
     static const int DAMAGE = 10;
+
     Goblin();
     ~Goblin() override = default;
 
-    Card* clone() const override;
+    Goblin* clone() const override;
 
     /**
-     * printing method for operator<<
-     * @param out
+     * apply damage on player
+     * @param player
      */
-    void print(std::ostream& out) const override;
+    void damage(Player &player) const override;
 
     /**
      * Handles player encounter with the card
@@ -32,9 +35,5 @@ public:
     **/
     void applyEncounter(Player& player) const override;
 
-private:
-    const int m_loot;
-    const int m_force;
-    const int m_damage;
 };
 #endif //EX4_GOBLIN_H

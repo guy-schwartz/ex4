@@ -2,9 +2,9 @@
 // Created by Guy Schwartz on 09/06/2022.
 //
 #include "Dragon.h"
-Dragon::Dragon(): Card("Dragon"), m_loot(LOOT), m_force(FORCE)  {}
+Dragon::Dragon(): Battle(DRAGON_CARD,LOOT,FORCE,0)  {}
 
-Card* Dragon::clone() const {
+Dragon* Dragon::clone() const {
     return new Dragon(*this);
 }
 
@@ -15,13 +15,17 @@ void Dragon::print(std::ostream &out) const {
 }
 
 void Dragon::applyEncounter(Player &player) const {
-    if(player.getAttackStrength()>=m_force){
+    if(playerWin(player)){
         player.levelUp();
         player.addCoins(m_loot);
         printWinBattle(player.getName(),m_name);
     }
     else{
-        player.damage(player.showHP());
-        printLossBattle(player.getName(),m_name);
+        damage(player);
     }
+}
+
+void Dragon::damage(Player &player) const {
+    player.damage(player.showHP());
+    printLossBattle(player.getName(),m_name);
 }

@@ -26,7 +26,7 @@ public:
      */
     ~Rogue() override=default;
 
-    Player* clone() const override;
+    Rogue* clone() const override;
 
     /**
     * member function adds coins by doubling the given value

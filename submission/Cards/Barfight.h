@@ -7,15 +7,16 @@
 
 #include "Card.h"
 
+const std::string FIGHTER="Fighter";
+
 class Barfight : public Card{
 public:
     static const int DAMAGE = 10;
-    const std::string FIGHTER="Fighter";
 
     Barfight();
     ~Barfight() override = default;
 
-    Card* clone() const override;
+    Barfight* clone() const override;
 
     /**
      * Handles non-Fighter player encounter with the card

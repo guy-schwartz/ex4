@@ -8,14 +8,15 @@
 
 #include "Card.h"
 
+const std::string PITFALL_CARD = "Pitfall";
 
 class Pitfall : public Card{
 public:
-    const std::string ROGUE="Rogue";
+
     Pitfall();
     ~Pitfall() override = default;
 
-    Card* clone() const override;
+    Pitfall* clone() const override;
 
     /**
      * Handles player encounter with the card

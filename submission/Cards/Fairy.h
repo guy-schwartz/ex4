@@ -7,16 +7,16 @@
 
 #include "Card.h"
 
+const std::string FAIRY="Fairy";
 
 class Fairy : public Card{
 public:
-    const std::string WIZARD="Wizard";
     static const int HEAL = 10;
 
     Fairy();
     ~Fairy() override = default;
 
-    Card* clone() const override;
+    Fairy* clone() const override;
 
     /**
      * Handles player encounter with the card

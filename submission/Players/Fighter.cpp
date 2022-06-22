@@ -5,7 +5,7 @@
 
 Fighter::Fighter(const std::string& name) : Player(name) {}
 
-Player* Fighter::clone() const {
+Fighter* Fighter::clone() const {
     return new Fighter(*this);
 }
 

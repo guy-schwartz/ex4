@@ -7,6 +7,8 @@
 
 #include "Card.h"
 
+const std::string MERCHANT_CARD = "Merchant";
+
 class Merchant : public Card{
     static const int HEAL = 1;
     static const int BUFF = 1;
@@ -19,7 +21,7 @@ public:
     Merchant();
     ~Merchant() override = default;
 
-    Card* clone() const override;
+    Merchant* clone() const override;
 
     /**
      * Handles player encounter with the card

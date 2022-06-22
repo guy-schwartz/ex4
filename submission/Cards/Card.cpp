@@ -18,3 +18,5 @@ std::ostream& operator<<(std::ostream& out, const Card& card)
     card.print(out);
     return out;
 }
+
+Card::Card() {}

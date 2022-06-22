@@ -5,7 +5,7 @@
 
 Wizard::Wizard(const std::string& name) : Player(name) {}
 
-Player* Wizard::clone() const {
+Wizard* Wizard::clone() const {
     return new Wizard(*this);
 }
 

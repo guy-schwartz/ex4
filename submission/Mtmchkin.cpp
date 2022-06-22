@@ -30,15 +30,11 @@ void Mtmchkin::initializeCards(const string &fileName) {
     int cardCounter=0;
     int lineCounter=1;
     while(getline(file,lineContent)){
-        unique_ptr<Card> card = getCardType(lineContent);
-        if(card==nullptr){
-            throw DeckFileFormatError(lineCounter);
-        }
-        else{
-            m_cardQueue.push_back(std::move(card));
-            cardCounter++;
-            lineCounter++;
-        }
+        unique_ptr<Card> card = getCardType(lineContent,file,lineCounter);
+        m_cardQueue.push_back(std::move(card));
+        cardCounter++;
+        lineCounter++;
+
     }
     if(cardCounter<MIN_CARDS){
         throw DeckFileInvalidSize();
@@ -94,7 +90,7 @@ int Mtmchkin::getTeamSize(){
 }
 
 
-unique_ptr<Card> Mtmchkin::getCardType(const string &input){
+unique_ptr<Card> Mtmchkin::getCardType(const std::string &input, fstream &file, int &countLines){
     if(input=="Barfight"){
         unique_ptr<Card> pCard(new Barfight());
         return pCard;
@@ -127,8 +123,12 @@ unique_ptr<Card> Mtmchkin::getCardType(const string &input){
         unique_ptr<Card> pCard(new Vampire());
         return pCard;
     }
+    else if (input=="Gang"){
+        unique_ptr<Card> pCard(new Gang(file,countLines));
+        return pCard;
+    }
     else{
-        return nullptr;
+        throw DeckFileFormatError(countLines);
     }
 }
 

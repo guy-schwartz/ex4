@@ -7,13 +7,14 @@
 
 #include "Card.h"
 
+const std::string TREASURE_CARD = "Treasure";
 
 class Treasure : public Card{
 public:
     Treasure();
     ~Treasure() override = default;
 
-    Card* clone() const override;
+    Treasure* clone() const override;
 
     /**
      * Handles player encounter with the card

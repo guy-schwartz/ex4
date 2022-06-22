@@ -2,26 +2,25 @@
 // Created by Guy Schwartz on 09/06/2022.
 //
 #include "Goblin.h"
-Goblin::Goblin(): Card("Goblin"), m_loot(LOOT), m_force(FORCE),  m_damage(DAMAGE) {}
 
-Card* Goblin::clone() const {
+Goblin::Goblin(): Battle(GOBLIN_CARD,LOOT,FORCE,DAMAGE) {}
+
+Goblin* Goblin::clone() const {
     return new Goblin(*this);
 }
 
-void Goblin::print(std::ostream &out) const {
-    printCardDetails(out,m_name);
-    printMonsterDetails(out,m_force,m_damage,m_loot,false);
-    printEndOfCardDetails(out);
-}
-
 void Goblin::applyEncounter(Player &player) const {
-    if(player.getAttackStrength()>=m_force){
+    if(playerWin(player)){
         player.levelUp();
         player.addCoins(m_loot);
         printWinBattle(player.getName(),m_name);
     }
     else{
-        player.damage(m_damage);
-        printLossBattle(player.getName(),m_name);
+        damage(player);
     }
+}
+
+void Goblin::damage(Player &player) const {
+    player.damage(m_damage);
+    printLossBattle(player.getName(),m_name);
 }
