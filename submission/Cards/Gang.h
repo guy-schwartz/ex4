@@ -36,6 +36,10 @@ public:
      */
     ~Gang() override = default;
 
+    /**
+     * clone function for Gang card
+     * @return
+     */
      Gang* clone() const override;
 
      Gang& operator=(Gang const &oldGang);

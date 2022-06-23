@@ -8,11 +8,11 @@
 #include "Player.h"
 #include "../utilities.h"
 
+const std::string  ROGUE_JOB = "Rogue";
+
 class Rogue : public Player{
 
 public:
-
-    const std::string  ROGUE_JOB = "Rogue";
 
     /**
   * c'tor for rogue

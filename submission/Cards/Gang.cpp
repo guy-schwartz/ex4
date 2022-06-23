@@ -14,14 +14,18 @@ Gang::Gang(std::fstream &file, int &countLines) : Card(GANG_CARD), m_battleCards
     getline(file,cardName);
     while(cardName!=END_READ){
         try{
-            addToGang(cardName);
             countLines++;
+            addToGang(cardName);
         }
         catch(DeckFileFormatError&){
             throw DeckFileFormatError(countLines);
         }
+        if(file.eof()){
+            throw DeckFileFormatError(countLines+1);
+        }
         getline(file,cardName);
     }
+    countLines++;
 }
 
 Gang* Gang::clone() const {
@@ -30,15 +34,15 @@ Gang* Gang::clone() const {
 
 
 void Gang::addToGang(std::string &cardName) {
-    if(cardName=="Dragon"){
+    if(cardName==DRAGON_CARD){
         unique_ptr<Battle> pCard(new Dragon());
         m_battleCards.push_back(std::move(pCard));
     }
-    else if(cardName=="Vampire"){
+    else if(cardName==VAMPIRE_CARD){
         unique_ptr<Battle> pCard(new Vampire());
         m_battleCards.push_back(std::move(pCard));
     }
-    else if(cardName=="Goblin"){
+    else if(cardName==GOBLIN_CARD){
         unique_ptr<Battle> pCard(new Goblin());
         m_battleCards.push_back(std::move(pCard));
     }
@@ -62,6 +66,7 @@ void Gang::applyEncounter(Player &player) const {
     }
     if(didWinAll){
         player.levelUp();
+        printWinBattle(player.getName(),GANG_CARD);
     }
 }
 

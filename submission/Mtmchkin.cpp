@@ -148,17 +148,17 @@ bool Mtmchkin::isNameValid(const string &playerName) {
 
 
 bool Mtmchkin::createPlayer(const string &playerName, const string &job) {
-    if(job=="Fighter"){
+    if(job==FIGHTER_JOB){
         unique_ptr<Player> pPlayer(new Fighter(playerName));
         m_activePlayers.push_back(std::move(pPlayer));
         return true;
     }
-    else if(job=="Rogue"){
+    else if(job==ROGUE_JOB){
         unique_ptr<Player> pPlayer(new Rogue(playerName));
         m_activePlayers.push_back(std::move(pPlayer));
         return true;
     }
-    else if(job=="Wizard"){
+    else if(job==WIZARD_JOB){
         unique_ptr<Player> pPlayer(new Wizard(playerName));
         m_activePlayers.push_back(std::move(pPlayer));
         return true;

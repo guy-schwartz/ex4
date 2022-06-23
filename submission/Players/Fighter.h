@@ -8,10 +8,11 @@
 #include "Player.h"
 #include "../utilities.h"
 
+const std::string FIGHTER_JOB = "Fighter";
+
 class Fighter : public Player{
 
 public:
-    const std::string FIGHTER_JOB = "Fighter";
 
     /**
       * c'tor for fighter

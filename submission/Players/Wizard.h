@@ -8,9 +8,10 @@
 #include "Player.h"
 #include "../utilities.h"
 
+const std::string WIZARD_JOB = "Wizard";
+
 class Wizard : public Player {
 public:
-    const std::string WIZARD_JOB = "Wizard";
 
     /**
      * c'tor for Wizard
